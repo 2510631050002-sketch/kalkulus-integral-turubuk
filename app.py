@@ -59,7 +59,7 @@ st.markdown(
 )
 
 ASSET_DIR = os.path.join(os.path.dirname(__file__), "assets")
-TERUBUK_IMG = os.path.join(ASSET_DIR, "terubuk.jpg")
+TERUBUK_IMG = os.path.join(ASSET_DIR, "terubuk.png")
 
 # ============================================================
 # DATA CONTOH & STATE
