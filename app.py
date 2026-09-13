@@ -425,12 +425,7 @@ def page_konteks():
         if os.path.exists(TERUBUK_IMG):
             st.image(TERUBUK_IMG, use_container_width=True)
             st.caption("Tanaman terubuk (Saccharum edule)")
-            st.caption(
-                "Catatan: gambar di atas adalah ilustrasi skematik orisinal (dibuat untuk bahan ajar "
-                "ini), bukan foto. Disarankan menggantinya dengan foto asli tanaman terubuk beserta "
-                "kredit sumbernya sebelum bahan ajar digunakan di kelas — simpan foto tersebut sebagai "
-                "`assets/terubuk.jpg` di folder proyek ini."
-            )
+
         else:
             st.info(
                 "Gambar belum tersedia. Simpan foto tanaman terubuk sebagai  "
