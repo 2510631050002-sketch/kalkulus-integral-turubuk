@@ -57,8 +57,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
-ASSET_DIR = os.path.join(os.path.dirname(__file__), "assets")
+TERUBUK_IMG = os.path.join(os.path.dirname(__file__), "terubuk.png")
 TERUBUK_IMG = os.path.join(ASSET_DIR, "terubuk.png")
 
 # ============================================================
