@@ -65,7 +65,7 @@ TERUBUK_IMG = os.path.join(os.path.dirname(__file__), "terubuk.png")
 SAMPLE = pd.DataFrame(
     {
         "Minggu": [1, 2, 3, 4, 5, 6, 7, 8],
-        "Tinggi Turubuk (cm)": [8.2, 14.5, 21.0, 28.8, 35.2, 41.0, 45.5, 49.0],
+        "Tinggi Terubuk (cm)": [8.2, 14.5, 21.0, 28.8, 35.2, 41.0, 45.5, 49.0],
     }
 )
 
@@ -147,9 +147,9 @@ def get_clean_data():
     df = st.session_state.data.copy()
     df = df.dropna()
     df = df[pd.to_numeric(df["Minggu"], errors="coerce").notna()]
-    df = df[pd.to_numeric(df["Tinggi Turubuk (cm)"], errors="coerce").notna()]
+    df = df[pd.to_numeric(df["Tinggi Terubuk (cm)"], errors="coerce").notna()]
     df["Minggu"] = df["Minggu"].astype(float)
-    df["Tinggi Turubuk (cm)"] = df["Tinggi Turubuk (cm)"].astype(float)
+    df["Tinggi Terubuk (cm)"] = df["Tinggi Terubuk (cm)"].astype(float)
     df = df.sort_values("Minggu").reset_index(drop=True)
     return df
 
@@ -163,7 +163,7 @@ menu = st.sidebar.radio(
     [
         "📖 Beranda",
         "📚 Materi",
-        "🌿 Konteks Turubuk",
+        "🌿 Konteks Terubuk",
         "📊 Data & Grafik",
         "📈 Model Matematika",
         "∫ Integral",
@@ -176,7 +176,7 @@ menu = st.sidebar.radio(
 )
 st.sidebar.markdown("---")
 st.sidebar.caption(
-    "Bahan ajar Kalkulus Integral berbasis etnomatematika Turubuk — "
+    "Bahan ajar Kalkulus Integral berbasis etnomatematika Terubuk — "
     "dari konsep, contoh, aktivitas, hingga evaluasi."
 )
 
@@ -203,11 +203,11 @@ def page_beranda():
                     background: linear-gradient(180deg, #EAF1E4 0%, {BG} 100%);
                     border: 1px solid #D8E0D5; margin-bottom: 18px;">
             <div class="kicker">Bahan Ajar Kalkulus Integral · Etnomatematika</div>
-            <h1 style="font-size: 2.1rem; margin: 6px 0;">Membaca Pertumbuhan Turubuk Lewat Bahasa Integral</h1>
+            <h1 style="font-size: 2.1rem; margin: 6px 0;">Membaca Pertumbuhan Terubuk Lewat Bahasa Integral</h1>
             <p style="color:{INK_SOFT}; max-width: 70ch;">
-            Turubuk adalah tanaman lokal yang biasa diamati dalam pembelajaran etnomatematika karena
+            Terubuk adalah tanaman lokal yang biasa diamati dalam pembelajaran etnomatematika karena
             polanya yang mudah diukur dari minggu ke minggu. Bahan ajar ini mengajakmu belajar integral
-            secara runtut — mulai dari konsep dasar, contoh soal, sampai mengolah data pertumbuhan Turubuk
+            secara runtut — mulai dari konsep dasar, contoh soal, sampai mengolah data pertumbuhan Terubuk
             sendiri: membuat model matematis, menurunkannya untuk melihat laju pertumbuhan, lalu
             mengintegralkannya untuk menghitung akumulasi pada rentang waktu yang kamu pilih.
             </p>
@@ -223,7 +223,7 @@ def page_beranda():
     )
     toc = [
         "Identitas bahan ajar", "Tujuan pembelajaran", "Prasyarat",
-        "Apersepsi / pertanyaan pemantik", "Mengenal konteks Turubuk",
+        "Apersepsi / pertanyaan pemantik", "Mengenal konteks Terubuk",
         "Materi: konsep integral, integral tentu, Teorema Dasar Kalkulus",
         "Contoh soal dan pembahasan", "Aktivitas 1 — Data pengamatan",
         "Grafik pertumbuhan", "Aktivitas 2 — Model matematika",
@@ -255,7 +255,7 @@ def page_beranda():
         st.session_state.identitas["alokasi"] = st.text_input(
             "Alokasi waktu", value=st.session_state.identitas["alokasi"]
         )
-        st.markdown(f"**Konteks**  \nPertumbuhan tanaman Turubuk")
+        st.markdown(f"**Konteks**  \nPertumbuhan tanaman Terubuk")
     st.caption("Kolom sasaran peserta didik dan alokasi waktu dapat diedit sesuai kebutuhan kelas.")
 
     st.markdown("---")
@@ -267,7 +267,7 @@ def page_beranda():
         "Menjelaskan pengertian integral tentu dan maknanya sebagai luas daerah di bawah kurva.",
         "Menggunakan Teorema Dasar Kalkulus untuk menghitung nilai integral tentu suatu fungsi.",
         "Menghitung integral tak tentu dan integral tentu dari fungsi polinomial sederhana.",
-        "Menginterpretasikan hasil integral dalam konteks pertumbuhan tanaman Turubuk, termasuk satuannya.",
+        "Menginterpretasikan hasil integral dalam konteks pertumbuhan tanaman Terubuk, termasuk satuannya.",
         "Menghubungkan konsep turunan dan integral dengan fenomena pertumbuhan yang dapat diamati di lingkungan sekitar.",
     ]
     for t in tujuan:
@@ -291,7 +291,7 @@ def page_beranda():
     st.markdown("### Sebelum mulai, coba pikirkan dulu")
     st.caption("Jawab dengan pemahamanmu sendiri dulu — belum ada jawaban benar/salah di sini, "
                "ini hanya pemantik supaya kamu siap masuk ke materi.")
-    st.text_area("1. Bagaimana cara kamu mengetahui perubahan tinggi Turubuk dari waktu ke waktu?",
+    st.text_area("1. Bagaimana cara kamu mengetahui perubahan tinggi Terubuk dari waktu ke waktu?",
                  key="aper_1", height=70)
     st.text_area("2. Jika tinggi tanaman berubah setiap minggu, bagaimana kita bisa menggambarkan "
                  "perubahan itu secara matematis?", key="aper_2", height=70)
@@ -378,10 +378,10 @@ def page_materi():
         st.markdown('<div class="equation">Hasil: ∫₁³ (2t + 1) dt = 10</div>', unsafe_allow_html=True)
 
     with st.container(border=True):
-        st.markdown("#### Contoh 3 — Konteks pertumbuhan Turubuk")
+        st.markdown("#### Contoh 3 — Konteks pertumbuhan Terubuk")
         st.write(
             "Sebagai ilustrasi (terpisah dari kalkulator interaktif di halaman **∫ Integral**), "
-            "misalkan dari sekelompok data pengamatan diperoleh model pertumbuhan Turubuk:"
+            "misalkan dari sekelompok data pengamatan diperoleh model pertumbuhan Terubuk:"
         )
         st.markdown('<div class="equation">H(t) = −0.3t² + 8t + 2</div>', unsafe_allow_html=True)
         st.write("dengan H(t) dalam cm dan t dalam minggu.")
@@ -392,7 +392,7 @@ def page_materi():
             "- **Proses:** F(4) = −0.1(64) + 4(16) + 2(4) = −6.4 + 64 + 8 = 65.6. "
             "F(1) = −0.1(1) + 4(1) + 2(1) = −0.1 + 4 + 2 = 5.9. F(4) − F(1) = 65.6 − 5.9 = 59.7.\n"
             "- **Hasil:** ∫₁⁴ H(t) dt = 59.7 cm·minggu.\n"
-            "- **Interpretasi:** Nilai 59.7 cm·minggu menyatakan akumulasi tinggi Turubuk terhadap "
+            "- **Interpretasi:** Nilai 59.7 cm·minggu menyatakan akumulasi tinggi Terubuk terhadap "
             "waktu sepanjang minggu ke-1 hingga ke-4 menurut model — bukan tinggi tanaman pada satu "
             "titik waktu. Perhatikan satuannya adalah cm·minggu (cm dikali minggu), karena integral "
             "mengalikan nilai H(t) (cm) dengan rentang waktu dt (minggu)."
@@ -408,13 +408,13 @@ def page_materi():
         "- **Teorema Dasar Kalkulus** menyatakan ∫ₐᵇ f(t)dt = F(b) − F(a), dengan F antiturunan dari f.\n"
         "- **Turunan dan integral saling berkebalikan:** turunan mengukur laju perubahan sesaat, "
         "integral mengukur akumulasi perubahan itu sepanjang suatu interval.\n"
-        "- Pada konteks Turubuk, integral H(t) pada rentang [a, b] menyatakan **akumulasi tinggi "
+        "- Pada konteks Terubuk, integral H(t) pada rentang [a, b] menyatakan **akumulasi tinggi "
         "terhadap waktu**, dengan satuan **cm·minggu** — bukan tinggi tanaman itu sendiri."
     )
 
 
 # ============================================================
-# HALAMAN: KONTEKS TURUBUK
+# HALAMAN: KONTEKS TERUBUK
 # ============================================================
 def page_konteks():
     st.markdown('<span class="badge">Konteks</span>', unsafe_allow_html=True)
@@ -434,13 +434,13 @@ def page_konteks():
 
     with col_text:
         st.write(
-            "Turubuk dikenal juga sebagai **tebu telur**, dengan nama ilmiah **_Saccharum edule_**. "
+            "Terubuk dikenal juga sebagai **tebu telur**, dengan nama ilmiah **_Saccharum edule_**. "
             "Bentuknya beruas-ruas dan menyerupai tanaman tebu, tetapi konteks pemanfaatannya berbeda: "
             "bagian yang biasa diambil adalah massa bunga muda yang masih terbungkus pelepah daun, "
             "bukan batangnya untuk diambil sarinya seperti tebu biasa."
         )
         st.write(
-            "Turubuk dipilih sebagai konteks belajar karena pertumbuhannya dapat diamati dan diukur "
+            "Terubuk dipilih sebagai konteks belajar karena pertumbuhannya dapat diamati dan diukur "
             "secara berkala dari minggu ke minggu, sehingga cocok dijadikan data nyata untuk belajar "
             "kalkulus."
         )
@@ -450,7 +450,7 @@ def page_konteks():
         <div class="info-box">
         Mengamati pertumbuhan tanaman yang dikenal di lingkungan sekitar adalah salah satu bentuk
         <strong>etnomatematika</strong>: cara memandang aktivitas atau pengetahuan lokal melalui
-        kacamata matematika. Dengan mengukur tinggi Turubuk setiap minggu, kita sebenarnya sedang
+        kacamata matematika. Dengan mengukur tinggi Terubuk setiap minggu, kita sebenarnya sedang
         mengumpulkan data yang bisa diolah menjadi fungsi matematis, lalu dianalisis lajunya
         (turunan) dan akumulasinya (integral).
         </div>
@@ -459,7 +459,7 @@ def page_konteks():
     )
     st.caption(
         "Catatan: bagian ini dapat dilengkapi guru dengan informasi budaya atau kearifan lokal "
-        "spesifik mengenai Turubuk sesuai daerah masing-masing."
+        "spesifik mengenai Terubuk sesuai daerah masing-masing."
     )
 
     st.markdown("#### Alur belajar etnomatematika pada bahan ajar ini")
@@ -476,7 +476,7 @@ def page_data():
     st.markdown('<span class="badge">Aktivitas 1</span>', unsafe_allow_html=True)
     st.markdown("## Mengamati data pertumbuhan")
     st.caption(
-        "Isi tinggi Turubuk (cm) untuk tiap minggu pengamatan. Sudah tersedia data contoh — silakan "
+        "Isi tinggi Terubuk (cm) untuk tiap minggu pengamatan. Sudah tersedia data contoh — silakan "
         "ubah nilainya langsung di tabel, tambah baris baru di bagian bawah tabel, atau hapus baris "
         "lewat kotak centang di kolom paling kiri lalu tekan tombol hapus (ikon tempat sampah)."
     )
@@ -488,7 +488,7 @@ def page_data():
         key="data_editor",
         column_config={
             "Minggu": st.column_config.NumberColumn("Minggu", step=1, min_value=0),
-            "Tinggi Turubuk (cm)": st.column_config.NumberColumn("Tinggi Turubuk (cm)", step=0.1, min_value=0.0),
+            "Tinggi Terubuk (cm)": st.column_config.NumberColumn("Tinggi Terubuk (cm)", step=0.1, min_value=0.0),
         },
     )
     st.session_state.data = edited
@@ -498,7 +498,7 @@ def page_data():
         if st.button("＋ Tambah minggu"):
             df = st.session_state.data
             last_week = df["Minggu"].max() if len(df) else 0
-            new_row = pd.DataFrame({"Minggu": [last_week + 1], "Tinggi Turubuk (cm)": [0.0]})
+            new_row = pd.DataFrame({"Minggu": [last_week + 1], "Tinggi Terubuk (cm)": [0.0]})
             st.session_state.data = pd.concat([df, new_row], ignore_index=True)
             st.rerun()
     with bcol2:
@@ -516,7 +516,7 @@ def page_data():
     if len(df_clean) > 0:
         prev_h = None
         for _, row in df_clean.iterrows():
-            wk, h = row["Minggu"], row["Tinggi Turubuk (cm)"]
+            wk, h = row["Minggu"], row["Tinggi Terubuk (cm)"]
             if prev_h is None:
                 note = "titik awal pengamatan"
             else:
@@ -541,13 +541,13 @@ def page_data():
         fig = go.Figure()
         fig.add_trace(
             go.Scatter(
-                x=df_clean["Minggu"], y=df_clean["Tinggi Turubuk (cm)"],
+                x=df_clean["Minggu"], y=df_clean["Tinggi Terubuk (cm)"],
                 mode="lines+markers", name="Data pengamatan",
                 line=dict(color=MOSS, width=2), marker=dict(color=FOREST, size=9),
             )
         )
         fig.update_layout(
-            xaxis_title="Waktu (minggu)", yaxis_title="Tinggi Turubuk (cm)",
+            xaxis_title="Waktu (minggu)", yaxis_title="Tinggi Terubuk (cm)",
             plot_bgcolor="white", paper_bgcolor="rgba(0,0,0,0)", height=400,
             margin=dict(l=10, r=10, t=20, b=10),
         )
@@ -569,7 +569,7 @@ def page_model():
     st.markdown("## Menemukan model matematis pertumbuhan")
     st.caption(
         "Data pengamatan didekati dengan model polinomial derajat dua menggunakan metode kuadrat "
-        "terkecil, supaya kita punya satu fungsi H(t) yang mewakili pola pertumbuhan Turubuk secara "
+        "terkecil, supaya kita punya satu fungsi H(t) yang mewakili pola pertumbuhan Terubuk secara "
         "keseluruhan."
     )
 
@@ -583,7 +583,7 @@ def page_model():
         unsafe_allow_html=True,
     )
     st.write(
-        "**H(t)** menyatakan perkiraan tinggi Turubuk (cm) pada waktu t (minggu) menurut model hasil "
+        "**H(t)** menyatakan perkiraan tinggi Terubuk (cm) pada waktu t (minggu) menurut model hasil "
         "regresi — bukan nilai pengukuran langsung, melainkan pendekatan terbaik dari seluruh titik data."
     )
 
@@ -591,7 +591,7 @@ def page_model():
     ts = np.linspace(lo, hi, 150)
     fig = go.Figure()
     fig.add_trace(
-        go.Scatter(x=df_clean["Minggu"], y=df_clean["Tinggi Turubuk (cm)"], mode="markers",
+        go.Scatter(x=df_clean["Minggu"], y=df_clean["Tinggi Terubuk (cm)"], mode="markers",
                    name="Data pengamatan", marker=dict(color=FOREST, size=9))
     )
     fig.add_trace(
@@ -599,7 +599,7 @@ def page_model():
                    line=dict(color=GOLD, width=3))
     )
     fig.update_layout(
-        xaxis_title="Waktu (minggu)", yaxis_title="Tinggi Turubuk (cm)",
+        xaxis_title="Waktu (minggu)", yaxis_title="Tinggi Terubuk (cm)",
         plot_bgcolor="white", paper_bgcolor="rgba(0,0,0,0)", height=400,
         margin=dict(l=10, r=10, t=20, b=10),
         legend=dict(orientation="h", yanchor="bottom", y=1.02),
@@ -608,10 +608,10 @@ def page_model():
     st.caption("Titik = data pengamatan · Garis = model H(t) hasil regresi.")
 
     st.markdown("---")
-    st.markdown("### Turunan: seberapa cepat Turubuk tumbuh?")
+    st.markdown("### Turunan: seberapa cepat Terubuk tumbuh?")
     st.write(
         "Turunan H'(t) menunjukkan laju pertumbuhan sesaat (cm per minggu) pada waktu t — ini jawaban "
-        'atas pertanyaan "minggu ini Turubuk sedang tumbuh cepat atau melambat?". Karena H\'(t) adalah '
+        'atas pertanyaan "minggu ini Terubuk sedang tumbuh cepat atau melambat?". Karena H\'(t) adalah '
         "turunan dari H(t), maka H(t) adalah salah satu antiturunan dari H'(t) — hubungan inilah yang "
         "nanti dipakai untuk menghitung integral."
     )
@@ -655,7 +655,7 @@ def page_model():
     )
     idc1, idc2 = st.columns([1, 3])
     rows = [
-        ("H(t)", "Tinggi Turubuk pada waktu t (satuan cm)"),
+        ("H(t)", "Tinggi Terubuk pada waktu t (satuan cm)"),
         ("H'(t)", "Laju pertumbuhan pada waktu t (satuan cm/minggu)"),
         ("∫ₐᵇ H(t) dt", "Akumulasi H(t) pada rentang [a, b] (satuan cm·minggu)"),
     ]
@@ -663,7 +663,7 @@ def page_model():
         st.markdown(f"**{label}** — {desc}")
     st.markdown(
         '**Pertanyaan aktivitas:** Jelaskan dengan kalimatmu sendiri, apa bedanya mengetahui '
-        '"tinggi Turubuk minggu ke-5" dengan mengetahui "akumulasi H(t) dari minggu 1 sampai 5"?'
+        '"tinggi Terubuk minggu ke-5" dengan mengetahui "akumulasi H(t) dari minggu 1 sampai 5"?'
     )
     st.text_area("Tulis penjelasanmu di sini...", key="akt3_jawaban", height=90)
 
@@ -724,11 +724,11 @@ def page_integral():
     fig.add_trace(go.Scatter(x=ts_shade, y=ys_shade, mode="lines", name="Daerah integral",
                               fill="tozeroy", line=dict(color=GOLD, width=2),
                               fillcolor="rgba(201,151,28,0.35)"))
-    max_y = max(float(np.max(ys_full)), float(df_clean["Tinggi Turubuk (cm)"].max())) * 1.15
+    max_y = max(float(np.max(ys_full)), float(df_clean["Tinggi Terubuk (cm)"].max())) * 1.15
     fig.add_shape(type="line", x0=lo, x1=lo, y0=0, y1=max_y, line=dict(color=CLAY, dash="dash"))
     fig.add_shape(type="line", x0=hi, x1=hi, y0=0, y1=max_y, line=dict(color=CLAY, dash="dash"))
     fig.update_layout(
-        xaxis_title="Waktu (minggu)", yaxis_title="Tinggi Turubuk (cm)",
+        xaxis_title="Waktu (minggu)", yaxis_title="Tinggi Terubuk (cm)",
         xaxis=dict(range=[domain_lo, domain_hi]), yaxis=dict(range=[0, max_y]),
         plot_bgcolor="white", paper_bgcolor="rgba(0,0,0,0)", height=420,
         margin=dict(l=10, r=10, t=20, b=10), showlegend=False,
@@ -777,10 +777,10 @@ def page_integral():
         "dulu, lalu tuliskan pemahamanmu sendiri di kotak yang disediakan."
     )
     growth_note = (
-        "Nilai koefisien a yang negatif menunjukkan laju pertumbuhan Turubuk melambat seiring waktu "
+        "Nilai koefisien a yang negatif menunjukkan laju pertumbuhan Terubuk melambat seiring waktu "
         "pada model ini."
         if a < 0 else
-        "Nilai koefisien a yang positif menunjukkan laju pertumbuhan Turubuk cenderung meningkat pada "
+        "Nilai koefisien a yang positif menunjukkan laju pertumbuhan Terubuk cenderung meningkat pada "
         "model ini — perlu dicek apakah ini realistis untuk rentang minggu yang diamati."
     )
     st.markdown(
@@ -792,10 +792,10 @@ def page_integral():
         integral ∫H(t)dt yang dihitung adalah <strong>{fmt(exact,3)} cm·minggu</strong>. Secara konsep,
         nilai ini adalah luas daerah di bawah kurva H(t) pada rentang tersebut — gambaran akumulasi
         H(t) terhadap waktu sepanjang periode itu. Perhatikan satuannya cm·minggu,
-        <strong>bukan</strong> tinggi Turubuk dalam cm, karena nilai ini diperoleh dari mengalikan
+        <strong>bukan</strong> tinggi Terubuk dalam cm, karena nilai ini diperoleh dari mengalikan
         tinggi (cm) dengan rentang waktu (minggu). {growth_note}
         <br><br>
-        Dalam konteks etnomatematika, pengamatan pertumbuhan tanaman lokal seperti Turubuk memberi
+        Dalam konteks etnomatematika, pengamatan pertumbuhan tanaman lokal seperti Terubuk memberi
         contoh nyata bahwa konsep turunan (laju perubahan) dan integral (akumulasi) tidak hanya
         berlaku pada rumus abstrak, tetapi juga pada proses yang dikenal sehari-hari oleh masyarakat.
         </div>
@@ -821,7 +821,7 @@ def page_aktivitas():
         "kerjakan di sana atau di sini, keduanya tersimpan selama sesi berjalan."
     )
 
-    st.markdown("### Aktivitas 1 — Mengamati data pertumbuhan Turubuk")
+    st.markdown("### Aktivitas 1 — Mengamati data pertumbuhan Terubuk")
     if len(df_clean) > 1:
         pilihan_minggu = df_clean["Minggu"].astype(int).astype(str).tolist()[1:]
         minggu_terpilih = st.selectbox(
@@ -840,13 +840,13 @@ def page_aktivitas():
         with wcol2:
             wb = st.selectbox("Minggu akhir", weeks, index=len(weeks) - 1, key="akt2_minggu_akhir")
         jawaban_delta = st.number_input(
-            "Berapa perubahan tinggi Turubuk (cm) dari minggu awal ke minggu akhir yang kamu pilih?",
+            "Berapa perubahan tinggi Terubuk (cm) dari minggu awal ke minggu akhir yang kamu pilih?",
             step=0.1, key="akt2_delta_input",
         )
         if st.button("Cek jawaban", key="akt2_cek"):
             try:
-                ha = float(df_clean.loc[df_clean["Minggu"] == wa, "Tinggi Turubuk (cm)"].iloc[0])
-                hb = float(df_clean.loc[df_clean["Minggu"] == wb, "Tinggi Turubuk (cm)"].iloc[0])
+                ha = float(df_clean.loc[df_clean["Minggu"] == wa, "Tinggi Terubuk (cm)"].iloc[0])
+                hb = float(df_clean.loc[df_clean["Minggu"] == wb, "Tinggi Terubuk (cm)"].iloc[0])
                 actual_delta = hb - ha
                 if abs(jawaban_delta - actual_delta) <= 0.2:
                     st.success(f"✓ Benar. Perubahan tingginya adalah {fmt(actual_delta,1)} cm.")
@@ -959,7 +959,7 @@ def page_latihan():
     st.markdown("#### Level 4 · Interpretasi / analisis")
     st.write(
         "5. Jika kamu membandingkan ∫₁³ H(t) dt dengan ∫₃⁵ H(t) dt (lebar interval sama, yaitu 2 "
-        "minggu) dan hasilnya berbeda, apa yang bisa kamu simpulkan tentang pertumbuhan Turubuk pada "
+        "minggu) dan hasilnya berbeda, apa yang bisa kamu simpulkan tentang pertumbuhan Terubuk pada "
         "kedua rentang tersebut? Kaitkan dengan bentuk grafik H(t)."
     )
     st.text_area("Tulis analisismu di sini...", key="l4_jawaban", height=90)
@@ -973,7 +973,7 @@ def page_evaluasi():
     st.markdown("## Evaluasi akhir")
     st.caption(
         "Evaluasi ini mengukur pemahamanmu secara menyeluruh, dari konsep sampai penerapan pada "
-        "konteks Turubuk. Jawab seluruh soal, lalu tekan tombol **Selesai & lihat skor** di bagian bawah."
+        "konteks Terubuk. Jawab seluruh soal, lalu tekan tombol **Selesai & lihat skor** di bagian bawah."
     )
 
     st.write("1. Manakah pernyataan yang paling tepat tentang Teorema Dasar Kalkulus?")
@@ -1003,7 +1003,7 @@ def page_evaluasi():
     )
     e4 = st.number_input("Jawaban", step=0.1, key="e4")
 
-    st.write("5. Jelaskan mengapa satuan hasil integral pada konteks Turubuk adalah cm·minggu, bukan cm.")
+    st.write("5. Jelaskan mengapa satuan hasil integral pada konteks Terubuk adalah cm·minggu, bukan cm.")
     st.text_area("Jawabanmu:", key="e5_text", height=90)
     with st.expander("Lihat kunci pembahasan"):
         st.write(
@@ -1067,10 +1067,10 @@ def page_refleksi():
         "untuk dinilai benar/salah."
     )
     st.text_area("1. Apa konsep yang kamu pahami hari ini?", key="ref_1", height=70)
-    st.text_area("2. Apa hubungan integral dengan pertumbuhan Turubuk?", key="ref_2", height=70)
+    st.text_area("2. Apa hubungan integral dengan pertumbuhan Terubuk?", key="ref_2", height=70)
     st.text_area("3. Bagian mana yang masih terasa sulit?", key="ref_3", height=70)
     st.text_area("4. Apa manfaat mempelajari integral melalui fenomena di sekitar, seperti "
-                 "pertumbuhan Turubuk?", key="ref_4", height=70)
+                 "pertumbuhan Terubuk?", key="ref_4", height=70)
 
 
 # ============================================================
@@ -1079,7 +1079,7 @@ def page_refleksi():
 PAGES = {
     "📖 Beranda": page_beranda,
     "📚 Materi": page_materi,
-    "🌿 Konteks Turubuk": page_konteks,
+    "🌿 Konteks Terubuk": page_konteks,
     "📊 Data & Grafik": page_data,
     "📈 Model Matematika": page_model,
     "∫ Integral": page_integral,
@@ -1093,6 +1093,6 @@ PAGES[menu]()
 
 st.markdown("---")
 st.caption(
-    "Bahan ajar kalkulus integral berbasis etnomatematika Turubuk — dari konsep, contoh, aktivitas, "
+    "Bahan ajar kalkulus integral berbasis etnomatematika Terubuk — dari konsep, contoh, aktivitas, "
     "hingga evaluasi."
 )
