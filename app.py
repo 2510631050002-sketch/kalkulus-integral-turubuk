@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Kalkulus Integral Etnomatematika Turubuk — versi Streamlit
+Kalkulus Integral Etnomatematika Terubuk — versi Streamlit
 Dikonversi dari bahan ajar HTML dengan konten, alur, dan perhitungan yang sama.
 Jalankan dengan:  streamlit run app.py
 """
@@ -15,7 +15,7 @@ import streamlit as st
 # KONFIGURASI HALAMAN
 # ============================================================
 st.set_page_config(
-    page_title="Kalkulus Integral Etnomatematika Turubuk",
+    page_title="Kalkulus Integral Etnomatematika Terubuk",
     page_icon="🌿",
     layout="wide",
 )
@@ -88,7 +88,7 @@ if "bounds" not in st.session_state:
 def fit_quadratic(df: pd.DataFrame):
     """Regresi kuadrat H(t) = a t^2 + b t + c menggunakan metode kuadrat terkecil."""
     x = df["Minggu"].to_numpy(dtype=float)
-    y = df["Tinggi Turubuk (cm)"].to_numpy(dtype=float)
+    y = df["Tinggi Terubuk (cm)"].to_numpy(dtype=float)
     if len(x) < 3 or np.unique(x).size < 3:
         return 0.0, 0.0, float(np.mean(y)) if len(y) else 0.0
     a, b, c = np.polyfit(x, y, 2)
@@ -121,7 +121,7 @@ def numeric_gradient(df: pd.DataFrame):
     """Laju rata-rata antar-titik data (beda hingga tengah untuk titik dalam)."""
     d = df.sort_values("Minggu").reset_index(drop=True)
     xs = d["Minggu"].to_numpy(dtype=float)
-    ys = d["Tinggi Turubuk (cm)"].to_numpy(dtype=float)
+    ys = d["Tinggi Terubuk (cm)"].to_numpy(dtype=float)
     n = len(d)
     slopes = np.zeros(n)
     for i in range(n):
