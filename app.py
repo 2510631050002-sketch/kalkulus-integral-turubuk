@@ -221,27 +221,34 @@ st.markdown(
     }}
 
 
-    /* ========================================================
-       RADIO BUTTON
-       ======================================================== */
+   /* ========================================================
+   MENU RADIO SIDEBAR
+   ======================================================== */
 
-    /* Tulisan pilihan radio tetap gelap. */
+/* Membuat tulisan menu sidebar tetap terlihat
+   baik pada mode terang maupun mode gelap perangkat. */
 
-    .stRadio label {{
-        color: #111111 !important;
-    }}
+section[data-testid="stSidebar"] [role="radiogroup"] label {
+    color: #111111 !important;
+}
 
+/* Tulisan nama setiap menu */
 
-    /* ========================================================
-       CHECKBOX
-       ======================================================== */
+section[data-testid="stSidebar"] [role="radiogroup"] label p {
+    color: #111111 !important;
+}
 
-    /* Tulisan checkbox tetap gelap. */
+/* Label "Pilih Halaman" */
 
-    .stCheckbox label {{
-        color: #111111 !important;
-    }}
+section[data-testid="stSidebar"] .stRadio > label {
+    color: #111111 !important;
+}
 
+/* Tulisan yang sedang dipilih */
+
+section[data-testid="stSidebar"] [role="radiogroup"] label[data-checked="true"] p {
+    color: #111111 !important;
+}
 
     /* ========================================================
        SLIDER
