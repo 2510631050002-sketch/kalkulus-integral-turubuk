@@ -72,39 +72,243 @@ INK_SOFT = "#5C655E"
 # 4. CSS / TAMPILAN APLIKASI
 # ------------------------------------------------------------
 
+# ------------------------------------------------------------
+# 4. CSS / TAMPILAN APLIKASI
+# ------------------------------------------------------------
+
 # CSS digunakan untuk mengatur tampilan aplikasi,
 # seperti warna background, ukuran tulisan, tombol,
-# kartu informasi, dan elemen lainnya.
+# sidebar, input, tabel, dan elemen lainnya.
+#
+# CSS ini juga dibuat agar tampilan aplikasi tetap terang
+# dan tulisan tetap terlihat jelas walaupun perangkat
+# pengguna sedang menggunakan mode gelap (dark mode).
+
 st.markdown(
     f"""
     <style>
 
-    /* Mengatur warna dasar halaman aplikasi */
+    /* ========================================================
+       BACKGROUND UTAMA APLIKASI
+       ======================================================== */
+
+    /* Background aplikasi tetap menggunakan warna BG.
+       !important digunakan agar tidak berubah mengikuti
+       pengaturan dark mode perangkat pengguna. */
+
     .stApp {{
-        background-color: {BG};
+        background-color: {BG} !important;
     }}
 
-    /* Mengatur tampilan judul */
-    h1, h2, h3 {{
-        color: {FOREST};
+
+    /* ========================================================
+       TEKS UTAMA
+       ======================================================== */
+
+    /* Tulisan pada aplikasi dipaksa tetap berwarna gelap.
+       Dengan begitu, tulisan tidak berubah menjadi putih
+       ketika perangkat menggunakan dark mode. */
+
+    .stApp p,
+    .stApp span,
+    .stApp li,
+    .stApp label {{
+        color: #111111 !important;
     }}
 
-    /* Mengatur tampilan teks */
-    p, li {{
-        color: {INK_SOFT};
+
+    /* ========================================================
+       JUDUL
+       ======================================================== */
+
+    /* Judul tetap menggunakan warna hijau tua
+       sesuai tema aplikasi. */
+
+    .stApp h1,
+    .stApp h2,
+    .stApp h3,
+    .stApp h4,
+    .stApp h5,
+    .stApp h6 {{
+        color: {FOREST} !important;
     }}
 
-    /* Mengatur tombol */
+
+    /* ========================================================
+       SIDEBAR
+       ======================================================== */
+
+    /* Background sidebar tetap terang. */
+
+    section[data-testid="stSidebar"] {{
+        background-color: {BG} !important;
+    }}
+
+    /* Tulisan di dalam sidebar tetap gelap. */
+
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] label {{
+        color: #111111 !important;
+    }}
+
+    /* Judul sidebar tetap menggunakan warna hijau. */
+
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3 {{
+        color: {FOREST} !important;
+    }}
+
+
+    /* ========================================================
+       TEXT INPUT
+       ======================================================== */
+
+    /* Kotak untuk memasukkan teks tetap berwarna putih
+       dan tulisan yang diketik tetap hitam. */
+
+    .stTextInput input {{
+        background-color: #FFFFFF !important;
+        color: #111111 !important;
+    }}
+
+    /* Warna tulisan petunjuk pada input. */
+
+    .stTextInput input::placeholder {{
+        color: #666666 !important;
+    }}
+
+
+    /* ========================================================
+       TEXT AREA
+       ======================================================== */
+
+    /* Kotak jawaban/refleksi tetap putih
+       dan tulisan pengguna tetap hitam. */
+
+    .stTextArea textarea {{
+        background-color: #FFFFFF !important;
+        color: #111111 !important;
+    }}
+
+    .stTextArea textarea::placeholder {{
+        color: #666666 !important;
+    }}
+
+
+    /* ========================================================
+       NUMBER INPUT
+       ======================================================== */
+
+    /* Kotak untuk memasukkan angka tetap putih
+       dan angka yang diketik tetap hitam. */
+
+    .stNumberInput input {{
+        background-color: #FFFFFF !important;
+        color: #111111 !important;
+    }}
+
+
+    /* ========================================================
+       SELECTBOX
+       ======================================================== */
+
+    /* Tulisan pada pilihan selectbox tetap gelap. */
+
+    .stSelectbox label {{
+        color: #111111 !important;
+    }}
+
+
+    /* ========================================================
+       RADIO BUTTON
+       ======================================================== */
+
+    /* Tulisan pilihan radio tetap gelap. */
+
+    .stRadio label {{
+        color: #111111 !important;
+    }}
+
+
+    /* ========================================================
+       CHECKBOX
+       ======================================================== */
+
+    /* Tulisan checkbox tetap gelap. */
+
+    .stCheckbox label {{
+        color: #111111 !important;
+    }}
+
+
+    /* ========================================================
+       SLIDER
+       ======================================================== */
+
+    /* Tulisan pada slider tetap gelap. */
+
+    .stSlider label {{
+        color: #111111 !important;
+    }}
+
+
+    /* ========================================================
+       TOMBOL
+       ======================================================== */
+
+    /* Tombol tetap putih dengan tulisan hitam
+       sehingga tetap terlihat jelas pada dark mode. */
+
     .stButton > button {{
+        background-color: #FFFFFF !important;
+        color: #111111 !important;
         border-radius: 10px;
         font-weight: 600;
+    }}
+
+
+    /* ========================================================
+       TABEL / DATA EDITOR
+       ======================================================== */
+
+    /* Tulisan pada tabel data tetap gelap. */
+
+    [data-testid="stDataEditor"] {{
+        color: #111111 !important;
+    }}
+
+
+    /* ========================================================
+       MARKDOWN
+       ======================================================== */
+
+    /* Tulisan yang dibuat menggunakan st.markdown()
+       tetap berwarna gelap. */
+
+    .stMarkdown p,
+    .stMarkdown li {{
+        color: #111111 !important;
+    }}
+
+
+    /* ========================================================
+       KOTAK INFORMASI / WARNING / SUCCESS / ERROR
+       ======================================================== */
+
+    /* Tulisan pada kotak informasi tetap dapat dibaca
+       ketika perangkat menggunakan dark mode. */
+
+    [data-testid="stAlert"] p,
+    [data-testid="stAlert"] span {{
+        color: #111111 !important;
     }}
 
     </style>
     """,
     unsafe_allow_html=True
 )
-
 
 # ------------------------------------------------------------
 # 5. LOKASI GAMBAR TERUBUK
