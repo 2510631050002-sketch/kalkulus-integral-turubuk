@@ -534,22 +534,45 @@ def get_clean_data():
 
 
 # ============================================================
-# 9. SIDEBAR / MENU APLIKASI
+# 9. MENU HALAMAN
 # ============================================================
 
-# Judul pada sidebar.
-st.sidebar.title("🌿 Kalkulus Terubuk")
+st.markdown(
+    """
+    <style>
+    /* Tombol menu utama */
+    div.stButton > button {
+        background-color: #1F3D2B !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 10px !important;
+        padding: 10px 18px !important;
+        font-weight: 600 !important;
+    }
 
-# Keterangan singkat aplikasi.
-st.sidebar.caption(
-    "Media Pembelajaran Kalkulus Integral "
-    "Berbasis Etnomatematika"
+    div.stButton > button:hover {
+        background-color: #4C7A57 !important;
+        color: white !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
 )
 
-# Menu navigasi aplikasi.
-menu = st.sidebar.radio(
-    "Pilih Halaman",
-    [
+# Tombol untuk membuka menu
+if "menu_buka" not in st.session_state:
+    st.session_state.menu_buka = False
+
+if st.button("☰  MENU HALAMAN"):
+    st.session_state.menu_buka = not st.session_state.menu_buka
+
+
+# Jika menu dibuka
+if st.session_state.menu_buka:
+
+    st.markdown("### 🌿 Pilih Halaman")
+
+    pilihan_menu = [
         "Beranda",
         "Materi",
         "Konteks Terubuk",
@@ -561,7 +584,20 @@ menu = st.sidebar.radio(
         "Evaluasi",
         "Refleksi"
     ]
-)
+
+    menu = st.selectbox(
+        "Pilih halaman:",
+        pilihan_menu,
+        key="pilihan_halaman"
+    )
+
+else:
+
+    # Halaman default
+    if "pilihan_halaman" not in st.session_state:
+        st.session_state.pilihan_halaman = "Beranda"
+
+    menu = st.session_state.pilihan_halaman
 
 
 # ============================================================
