@@ -542,7 +542,7 @@ st.markdown( # menampilkan teks/HTML/CSS pada aplikasi
     <style>
     /* Tombol menu utama */
     div.stButton > button {
-        background-color: #1F3D2B !important;
+        background-color: #C49A45 !important;
         color: white !important;
         border: none !important;
         border-radius: 10px !important;
