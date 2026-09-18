@@ -99,6 +99,7 @@ st.markdown( # menampilkan teks/HTML/CSS pada aplikasi
 
     .stApp {{
         background-color: {BG} !important;
+         font-family: "Poppins", sans-serif !important;
     }}
 
 
