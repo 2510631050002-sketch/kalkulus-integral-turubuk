@@ -9,21 +9,21 @@
 
 # Library os digunakan untuk mengatur lokasi/path file,
 # misalnya untuk mencari gambar terubuk di folder aplikasi.
-import os
+import os # mengimpor modul os untuk mengatur path/file
 
 # NumPy digunakan untuk perhitungan matematika,
 # seperti membuat model fungsi dan menghitung integral.
-import numpy as np
+import numpy as np # mengimpor NumPy untuk perhitungan numerik
 
 # Pandas digunakan untuk membuat dan mengolah tabel data.
-import pandas as pd
+import pandas as pd # mengimpor Pandas untuk mengolah data tabel
 
 # Plotly digunakan untuk membuat grafik interaktif.
-import plotly.graph_objects as go
+import plotly.graph_objects as go # mengimpor Plotly untuk membuat grafik interaktif
 
 # Streamlit digunakan untuk membuat aplikasi web
 # berbasis Python.
-import streamlit as st
+import streamlit as st # mengimpor Streamlit untuk membuat aplikasi web
 
 
 # ------------------------------------------------------------
@@ -32,11 +32,11 @@ import streamlit as st
 
 # Mengatur judul yang muncul pada tab browser,
 # ikon aplikasi, dan tampilan halaman menjadi lebar.
-st.set_page_config(
-    page_title="Kalkulus Integral Etnomatematika Terubuk",
-    page_icon="🌿",
-    layout="wide",
-    initial_sidebar_state="expanded"
+st.set_page_config( # mengatur konfigurasi halaman Streamlit
+    page_title="Kalkulus Integral Etnomatematika Terubuk", # menentukan judul tab browser
+    page_icon="🌿", # menentukan ikon tab browser
+    layout="wide", # membuat tampilan aplikasi menggunakan lebar layar
+    initial_sidebar_state="expanded" # membuat sidebar terbuka saat aplikasi pertama kali dijalankan
 )
 
 
@@ -85,7 +85,7 @@ INK_SOFT = "#5C655E"
 # dan tulisan tetap terlihat jelas walaupun perangkat
 # pengguna sedang menggunakan mode gelap (dark mode).
 
-st.markdown(
+st.markdown( # menampilkan teks/HTML/CSS pada aplikasi
     f"""
     <style>
 
@@ -329,7 +329,7 @@ button[data-testid="stSidebarCollapsedControl"] svg {{
 }}
     </style>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True # mengizinkan HTML/CSS ditampilkan oleh Streamlit
 )
 
 # ------------------------------------------------------------
@@ -338,9 +338,9 @@ button[data-testid="stSidebarCollapsedControl"] svg {{
 
 # Mencari lokasi file app.py terlebih dahulu,
 # kemudian mencari gambar terubuk di folder yang sama.
-TERUBUK_IMG = os.path.join(
-    os.path.dirname(__file__),
-    "terubuk.png"
+TERUBUK_IMG = os.path.join( # membuat alamat/path file gambar terubuk
+    os.path.dirname(__file__), # mengambil folder tempat file app.py berada
+    "terubuk.png" # menentukan nama file gambar terubuk
 )
 
 
@@ -351,9 +351,9 @@ TERUBUK_IMG = os.path.join(
 # Data awal yang digunakan sebagai contoh.
 # Minggu menunjukkan waktu pengamatan,
 # sedangkan tinggi menunjukkan tinggi tanaman dalam cm.
-SAMPLE = pd.DataFrame({
-    "Minggu": [1, 2, 3, 4, 5, 6, 7, 8],
-    "Tinggi_cm": [
+SAMPLE = pd.DataFrame({ # membuat DataFrame berisi data contoh pertumbuhan
+    "Minggu": [1, 2, 3, 4, 5, 6, 7, 8], # menyimpan data waktu pengamatan dalam minggu
+    "Tinggi_cm": [ # menyimpan data tinggi tanaman dalam cm
         8.2,
         14.5,
         21.0,
@@ -373,21 +373,21 @@ SAMPLE = pd.DataFrame({
 # session_state digunakan agar data yang dimasukkan pengguna
 # tetap tersimpan ketika Streamlit melakukan refresh/rerun.
 
-if "data" not in st.session_state:
-    st.session_state.data = SAMPLE.copy()
+if "data" not in st.session_state: # mengecek apakah data belum tersimpan di session
+    st.session_state.data = SAMPLE.copy() # menyimpan salinan data contoh ke session
 
 # Menyimpan identitas pengguna.
-if "identitas" not in st.session_state:
-    st.session_state.identitas = {
-        "nama": "",
-        "kelas": ""
+if "identitas" not in st.session_state: # mengecek apakah identitas pengguna belum tersedia
+    st.session_state.identitas = { # membuat tempat penyimpanan nama dan kelas
+        "nama": "", # menyediakan nilai awal untuk nama
+        "kelas": "" # menyediakan nilai awal untuk kelas
     }
 
 # Menyimpan batas integral yang digunakan pengguna.
-if "bounds" not in st.session_state:
-    st.session_state.bounds = {
-        "bawah": 1.0,
-        "atas": 8.0
+if "bounds" not in st.session_state: # mengecek apakah batas integral belum tersedia
+    st.session_state.bounds = { # membuat tempat penyimpanan batas integral
+        "bawah": 1.0, # menentukan batas bawah integral awal
+        "atas": 8.0 # menentukan batas atas integral awal
     }
 
 
@@ -395,7 +395,7 @@ if "bounds" not in st.session_state:
 # 8. FUNGSI-FUNGSI MATEMATIKA
 # ============================================================
 
-def fit_quadratic(x, y):
+def fit_quadratic(x, y): # membuat fungsi untuk mencari model fungsi kuadrat
     """
     Membuat model fungsi kuadrat berdasarkan data.
 
@@ -407,23 +407,23 @@ def fit_quadratic(x, y):
     """
 
     # Degree 2 berarti kita menggunakan fungsi kuadrat.
-    a, b, c = np.polyfit(x, y, 2)
+    a, b, c = np.polyfit(x, y, 2) # menghitung koefisien a, b, c dari model kuadrat
 
     # Mengembalikan koefisien model.
-    return a, b, c
+    return a, b, c # mengembalikan koefisien model
 
 
-def H(t, a, b, c):
+def H(t, a, b, c): # membuat fungsi tinggi tanaman H(t)
     """
     Menghitung tinggi tanaman berdasarkan model:
     
         H(t) = at² + bt + c
     """
 
-    return a * t**2 + b * t + c
+    return a * t**2 + b * t + c # menghitung nilai H(t) berdasarkan model kuadrat
 
 
-def Hprime(t, a, b):
+def Hprime(t, a, b): # membuat fungsi turunan pertama H(t)
     """
     Menghitung turunan pertama dari model.
 
@@ -434,10 +434,10 @@ def Hprime(t, a, b):
         H'(t) = 2at + b
     """
 
-    return 2 * a * t + b
+    return 2 * a * t + b # menghitung nilai turunan model
 
 
-def antiderivative_at(t, a, b, c):
+def antiderivative_at(t, a, b, c): # membuat fungsi antiturunan H(t)
     """
     Menghitung nilai antiturunan dari H(t).
 
@@ -448,14 +448,14 @@ def antiderivative_at(t, a, b, c):
         ∫H(t)dt = (a/3)t³ + (b/2)t² + ct
     """
 
-    return (
-        (a / 3) * t**3
-        + (b / 2) * t**2
-        + c * t
+    return ( # memulai perhitungan nilai antiturunan
+        (a / 3) * t**3 # menghitung bagian integral dari at²
+        + (b / 2) * t**2 # menghitung bagian integral dari bt
+        + c * t # menghitung bagian integral dari c
     )
 
 
-def exact_integral(lo, hi, a, b, c):
+def exact_integral(lo, hi, a, b, c): # membuat fungsi integral tentu secara analitik
     """
     Menghitung integral tentu secara analitik.
 
@@ -464,13 +464,13 @@ def exact_integral(lo, hi, a, b, c):
         = F(hi) - F(lo)
     """
 
-    return (
-        antiderivative_at(hi, a, b, c)
+    return ( # memulai perhitungan nilai antiturunan
+        antiderivative_at(hi, a, b, c) # menghitung antiturunan pada batas atas
         - antiderivative_at(lo, a, b, c)
     )
 
 
-def trapezoid_integral(x, y):
+def trapezoid_integral(x, y): # membuat fungsi integral numerik metode trapesium
     """
     Menghitung integral secara numerik menggunakan
     metode trapesium.
@@ -479,10 +479,10 @@ def trapezoid_integral(x, y):
     di bawah kurva berdasarkan data yang tersedia.
     """
 
-    return np.trapezoid(y, x)
+    return np.trapezoid(y, x) # menghitung luas/akumulasi dengan metode trapesium
 
 
-def numeric_gradient(x, y):
+def numeric_gradient(x, y): # membuat fungsi perubahan data secara numerik
     """
     Menghitung perubahan/kemiringan data secara numerik.
 
@@ -490,10 +490,10 @@ def numeric_gradient(x, y):
     kecepatan pertumbuhan tanaman.
     """
 
-    return np.gradient(y, x)
+    return np.gradient(y, x) # menghitung kemiringan/perubahan data
 
 
-def fmt(value, digits=2):
+def fmt(value, digits=2): # membuat fungsi untuk memformat angka
     """
     Mengubah angka menjadi format yang lebih rapi.
 
@@ -501,43 +501,43 @@ def fmt(value, digits=2):
         12.3456 -> 12.35
     """
 
-    return f"{value:.{digits}f}"
+    return f"{value:.{digits}f}" # mengubah angka menjadi format desimal yang rapi
 
 
-def get_clean_data():
+def get_clean_data(): # membuat fungsi untuk mengambil dan membersihkan data
     """
     Mengambil data dari session_state kemudian
     membersihkan data yang kosong atau tidak valid.
     """
 
     # Mengambil data yang sedang tersimpan.
-    df = st.session_state.data.copy()
+    df = st.session_state.data.copy() # mengambil salinan data dari session
 
     # Mengubah kolom menjadi tipe numerik.
-    df["Minggu"] = pd.to_numeric(
+    df["Minggu"] = pd.to_numeric( # mengubah kolom Minggu menjadi angka
         df["Minggu"],
-        errors="coerce"
+        errors="coerce" # mengubah nilai yang tidak valid menjadi NaN
     )
 
-    df["Tinggi_cm"] = pd.to_numeric(
+    df["Tinggi_cm"] = pd.to_numeric( # mengubah kolom Tinggi_cm menjadi angka
         df["Tinggi_cm"],
-        errors="coerce"
+        errors="coerce" # mengubah nilai yang tidak valid menjadi NaN
     )
 
     # Menghapus baris yang memiliki data kosong.
-    df = df.dropna()
+    df = df.dropna() # menghapus baris yang memiliki data kosong
 
     # Mengurutkan data berdasarkan minggu.
-    df = df.sort_values("Minggu")
+    df = df.sort_values("Minggu") # mengurutkan data berdasarkan minggu
 
-    return df
+    return df # mengembalikan data yang sudah bersih
 
 
 # ============================================================
 # 9. MENU HALAMAN
 # ============================================================
 
-st.markdown(
+st.markdown( # menampilkan teks/HTML/CSS pada aplikasi
     """
     <style>
     /* Tombol menu utama */
@@ -556,19 +556,19 @@ st.markdown(
     }
     </style>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True # mengizinkan HTML/CSS ditampilkan oleh Streamlit
 )
 
 # Tombol untuk membuka menu
-if "menu_buka" not in st.session_state:
-    st.session_state.menu_buka = False
+if "menu_buka" not in st.session_state:  # mengecek apakah status menu sudah disimpan
+    st.session_state.menu_buka = False  # menu awalnya dalam keadaan tertutup
 
-if st.button("☰  MENU HALAMAN"):
-    st.session_state.menu_buka = not st.session_state.menu_buka
+if st.button("☰  MENU HALAMAN"):  # membuat tombol yang bisa diklik untuk membuka/menutup menu # menjalankan blok kode ketika tombol diklik
+    st.session_state.menu_buka = not st.session_state.menu_buka  # membalik status menu: tertutup ↔ terbuka
 
 
 # Jika menu dibuka
-if st.session_state.menu_buka:
+if st.session_state.menu_buka:  # menampilkan pilihan halaman jika menu sedang terbuka
 
     st.markdown("### 🌿 Pilih Halaman")
 
@@ -585,7 +585,7 @@ if st.session_state.menu_buka:
         "Refleksi"
     ]
 
-    menu = st.selectbox(
+    menu = st.selectbox(  # membuat daftar pilihan halaman
         "Pilih halaman:",
         pilihan_menu,
         key="pilihan_halaman"
@@ -597,7 +597,7 @@ else:
     if "pilihan_halaman" not in st.session_state:
         st.session_state.pilihan_halaman = "Beranda"
 
-    menu = st.session_state.pilihan_halaman
+    menu = st.session_state.pilihan_halaman  # menggunakan halaman terakhir/default saat menu tertutup
 
 
 # ============================================================
@@ -650,10 +650,10 @@ default_hi = st.session_state.bounds["atas"]
 def page_beranda():
 
     # Judul utama halaman.
-    st.title("🌿 Kalkulus Integral Etnomatematika Terubuk")
+    st.title("🌿 Kalkulus Integral Etnomatematika Terubuk") # menampilkan judul utama aplikasi
 
     # Deskripsi singkat aplikasi.
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Media pembelajaran yang menghubungkan konsep "
         "kalkulus integral dengan pertumbuhan tanaman terubuk."
     )
@@ -662,7 +662,7 @@ def page_beranda():
     # tampilkan gambar tersebut.
     if os.path.exists(TERUBUK_IMG):
 
-        st.image(
+        st.image( # menampilkan gambar
             TERUBUK_IMG,
             caption="Tanaman Terubuk"
         )
@@ -671,7 +671,7 @@ def page_beranda():
 
         # Jika gambar tidak ditemukan,
         # tampilkan pesan informasi.
-        st.info(
+        st.info( # menampilkan kotak informasi
             "Simpan foto tanaman terubuk "
             "di folder aplikasi."
         )
@@ -680,19 +680,19 @@ def page_beranda():
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.metric(
+        st.metric( # menampilkan angka/statistik dalam bentuk metric
             "Data Pengamatan",
             f"{len(df_clean)} data"
         )
 
     with col2:
-        st.metric(
+        st.metric( # menampilkan angka/statistik dalam bentuk metric
             "Model",
             "Kuadrat"
         )
 
     with col3:
-        st.metric(
+        st.metric( # menampilkan angka/statistik dalam bentuk metric
             "Topik",
             "Integral"
         )
@@ -707,26 +707,26 @@ def page_materi():
     st.title("📚 Materi Kalkulus Integral")
 
     # Penjelasan konsep dasar integral.
-    st.subheader("Apa itu Integral?")
+    st.subheader("Apa itu Integral?") # menampilkan subjudul bagian
 
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Integral dapat digunakan untuk menentukan luas "
         "di bawah kurva dan menghitung akumulasi suatu besaran."
     )
 
     # Menampilkan bentuk umum fungsi.
-    st.latex(
+    st.latex( # menampilkan rumus matematika dalam format LaTeX
         r"H(t)=at^2+bt+c"
     )
 
     # Menampilkan bentuk integral.
-    st.latex(
+    st.latex( # menampilkan rumus matematika dalam format LaTeX
         r"\int H(t)\,dt"
     )
 
     st.subheader("Hubungan dengan Pertumbuhan Terubuk")
 
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Data pertumbuhan terubuk dapat dimodelkan "
         "menggunakan fungsi matematika. Model tersebut "
         "kemudian dapat digunakan untuk mempelajari "
@@ -742,14 +742,14 @@ def page_konteks():
 
     st.title("🌱 Konteks Terubuk")
 
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Terubuk merupakan salah satu tanaman yang "
         "dapat dikaji menggunakan pendekatan etnomatematika."
     )
 
     st.subheader("Mengapa menggunakan terubuk?")
 
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Konteks tanaman terubuk digunakan agar konsep "
         "kalkulus tidak hanya dipelajari secara abstrak, "
         "tetapi dikaitkan dengan objek yang ada di lingkungan."
@@ -757,7 +757,7 @@ def page_konteks():
 
     st.subheader("Hubungan dengan Matematika")
 
-    st.markdown("""
+    st.markdown(""" # menampilkan teks/HTML/CSS pada aplikasi
     - Pengamatan pertumbuhan → data matematika
     - Data pertumbuhan → grafik
     - Grafik → model fungsi
@@ -775,25 +775,25 @@ def page_data():
 
     st.title("📊 Data & Grafik Pertumbuhan")
 
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Data berikut dapat diedit sesuai hasil pengamatan."
     )
 
     # Menampilkan tabel yang dapat diedit.
     edited_df = st.data_editor(
         st.session_state.data,
-        num_rows="dynamic",
+        num_rows="dynamic", # mengizinkan pengguna menambah/menghapus baris tabel
         use_container_width=True
     )
 
     # Tombol untuk menyimpan perubahan data.
-    if st.button("💾 Simpan Data"):
+    if st.button("💾 Simpan Data"): # menjalankan blok kode ketika tombol diklik
 
         st.session_state.data = edited_df
 
         # Setelah data disimpan,
         # aplikasi dijalankan kembali agar model terbaru digunakan.
-        st.rerun()
+        st.rerun() # menjalankan ulang aplikasi agar perubahan data langsung dipakai
 
     # Mengambil data terbaru.
     df = get_clean_data()
@@ -804,24 +804,24 @@ def page_data():
         fig = go.Figure()
 
         # Menambahkan titik data asli.
-        fig.add_trace(
-            go.Scatter(
+        fig.add_trace( # menambahkan data/kurva ke grafik
+            go.Scatter( # membuat grafik titik/garis Scatter
                 x=df["Minggu"],
                 y=df["Tinggi_cm"],
-                mode="markers+lines",
+                mode="markers+lines", # menampilkan titik sekaligus garis
                 name="Data Pengamatan"
             )
         )
 
         # Mengatur judul dan label grafik.
-        fig.update_layout(
+        fig.update_layout( # mengatur judul dan label grafik
             title="Grafik Pertumbuhan Terubuk",
             xaxis_title="Minggu",
             yaxis_title="Tinggi (cm)"
         )
 
         # Menampilkan grafik.
-        st.plotly_chart(
+        st.plotly_chart( # menampilkan grafik Plotly di aplikasi
             fig,
             use_container_width=True
         )
@@ -838,7 +838,7 @@ def page_model():
     # Mengecek apakah data cukup untuk membuat model.
     if len(df_clean) < 3:
 
-        st.warning(
+        st.warning( # menampilkan peringatan
             "Minimal diperlukan 3 data untuk membuat "
             "model fungsi kuadrat."
         )
@@ -848,29 +848,29 @@ def page_model():
     # Menampilkan bentuk model.
     st.subheader("Model Pertumbuhan")
 
-    st.latex(
+    st.latex( # menampilkan rumus matematika dalam format LaTeX
         r"H(t)=at^2+bt+c"
     )
 
     # Menampilkan nilai koefisien.
-    st.write(f"Nilai a = {a:.4f}")
-    st.write(f"Nilai b = {b:.4f}")
-    st.write(f"Nilai c = {c:.4f}")
+    st.write(f"Nilai a = {a:.4f}") # menampilkan teks biasa pada halaman
+    st.write(f"Nilai b = {b:.4f}") # menampilkan teks biasa pada halaman
+    st.write(f"Nilai c = {c:.4f}") # menampilkan teks biasa pada halaman
 
     # Menampilkan persamaan model.
-    st.latex(
+    st.latex( # menampilkan rumus matematika dalam format LaTeX
         rf"H(t)={a:.4f}t^2+{b:.4f}t+{c:.4f}"
     )
 
     st.subheader("Turunan Model")
 
     # Turunan fungsi kuadrat.
-    st.latex(
+    st.latex( # menampilkan rumus matematika dalam format LaTeX
         rf"H'(t)=2({a:.4f})t+({b:.4f})"
     )
 
     # Penjelasan sederhana.
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Turunan dapat digunakan untuk melihat perubahan "
         "tinggi tanaman terhadap waktu."
     )
@@ -894,32 +894,32 @@ def page_model():
     fig = go.Figure()
 
     # Data asli.
-    fig.add_trace(
-        go.Scatter(
+    fig.add_trace( # menambahkan data/kurva ke grafik
+        go.Scatter( # membuat grafik titik/garis Scatter
             x=df_clean["Minggu"],
             y=df_clean["Tinggi_cm"],
-            mode="markers",
+            mode="markers", # menampilkan titik data
             name="Data"
         )
     )
 
     # Kurva model.
-    fig.add_trace(
-        go.Scatter(
+    fig.add_trace( # menambahkan data/kurva ke grafik
+        go.Scatter( # membuat grafik titik/garis Scatter
             x=t_model,
             y=y_model,
-            mode="lines",
+            mode="lines", # menampilkan garis/kurva
             name="Model Kuadrat"
         )
     )
 
-    fig.update_layout(
+    fig.update_layout( # mengatur judul dan label grafik
         title="Data dan Model Pertumbuhan",
         xaxis_title="Minggu",
         yaxis_title="Tinggi (cm)"
     )
 
-    st.plotly_chart(
+    st.plotly_chart( # menampilkan grafik Plotly di aplikasi
         fig,
         use_container_width=True
     )
@@ -933,7 +933,7 @@ def page_integral():
 
     st.title("∫ Integral Pertumbuhan Terubuk")
 
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Gunakan slider berikut untuk menentukan batas "
         "integral berdasarkan waktu pengamatan."
     )
@@ -960,7 +960,7 @@ def page_integral():
     # daripada batas atas.
     if lo > hi:
 
-        st.error(
+        st.error( # menampilkan pesan kesalahan
             "Batas bawah tidak boleh lebih besar "
             "daripada batas atas."
         )
@@ -979,18 +979,18 @@ def page_integral():
     st.subheader("Hasil Integral")
 
     # Menampilkan hasil.
-    st.metric(
+    st.metric( # menampilkan angka/statistik dalam bentuk metric
         "Nilai Integral",
         f"{hasil_exact:.2f}"
     )
 
     # Menampilkan rumus integral.
-    st.latex(
+    st.latex( # menampilkan rumus matematika dalam format LaTeX
         rf"\int_{{{lo:.2f}}}^{{{hi:.2f}}} H(t)\,dt"
         rf" = {hasil_exact:.2f}"
     )
 
-    st.info(
+    st.info( # menampilkan kotak informasi
         "Nilai integral dapat diinterpretasikan sebagai "
         "akumulasi tinggi berdasarkan model pada interval "
         "waktu yang dipilih."
@@ -1024,16 +1024,16 @@ def page_integral():
     )
 
     # Menampilkan hasil metode numerik.
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         f"Integral analitik: {hasil_exact:.4f}"
     )
 
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         f"Integral numerik: {hasil_numerik:.4f}"
     )
 
     # Selisih kedua metode.
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         f"Selisih: "
         f"{abs(hasil_exact - hasil_numerik):.6f}"
     )
@@ -1047,14 +1047,14 @@ def page_aktivitas():
 
     st.title("📝 Aktivitas Pembelajaran")
 
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Gunakan data pertumbuhan terubuk untuk melakukan "
         "analisis matematika."
     )
 
     st.subheader("Langkah Aktivitas")
 
-    st.markdown("""
+    st.markdown(""" # menampilkan teks/HTML/CSS pada aplikasi
     **1. Amati data**
 
     Perhatikan perubahan tinggi terubuk dari minggu ke minggu.
@@ -1091,7 +1091,7 @@ def page_latihan():
 
     st.subheader("Latihan 1")
 
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Berdasarkan model pertumbuhan yang diperoleh, "
         "tentukan tinggi terubuk pada minggu ke-6."
     )
@@ -1103,7 +1103,7 @@ def page_latihan():
         key="latihan1"
     )
 
-    if st.button("Periksa Jawaban 1"):
+    if st.button("Periksa Jawaban 1"): # menjalankan blok kode ketika tombol diklik
 
         kunci1 = H(
             6,
@@ -1114,13 +1114,13 @@ def page_latihan():
 
         if abs(jawaban1 - kunci1) < 0.5:
 
-            st.success(
+            st.success( # menampilkan pesan berhasil
                 "Jawaban kamu mendekati hasil model."
             )
 
         else:
 
-            st.warning(
+            st.warning( # menampilkan peringatan
                 f"Hasil model sekitar "
                 f"{kunci1:.2f} cm."
             )
@@ -1134,7 +1134,7 @@ def page_evaluasi():
 
     st.title("📋 Evaluasi")
 
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Jawablah pertanyaan berikut berdasarkan "
         "pemahaman terhadap materi."
     )
@@ -1166,9 +1166,9 @@ def page_evaluasi():
     )
 
     # Tombol untuk mengirim evaluasi.
-    if st.button("Kirim Evaluasi"):
+    if st.button("Kirim Evaluasi"): # menjalankan blok kode ketika tombol diklik
 
-        st.success(
+        st.success( # menampilkan pesan berhasil
             f"Evaluasi {nama} berhasil dikirim."
         )
 
@@ -1181,7 +1181,7 @@ def page_refleksi():
 
     st.title("💭 Refleksi")
 
-    st.write(
+    st.write( # menampilkan teks biasa pada halaman
         "Tuliskan pengalaman dan pemahaman setelah "
         "menggunakan media pembelajaran."
     )
@@ -1192,17 +1192,17 @@ def page_refleksi():
     )
 
     # Tombol simpan refleksi.
-    if st.button("Simpan Refleksi"):
+    if st.button("Simpan Refleksi"): # menjalankan blok kode ketika tombol diklik
 
-        if refleksi.strip():
+        if refleksi.strip(): # mengecek apakah jawaban refleksi tidak kosong
 
-            st.success(
+            st.success( # menampilkan pesan berhasil
                 "Refleksi berhasil disimpan."
             )
 
         else:
 
-            st.warning(
+            st.warning( # menampilkan peringatan
                 "Silakan tuliskan refleksi terlebih dahulu."
             )
 
@@ -1213,7 +1213,7 @@ def page_refleksi():
 
 # Dictionary digunakan untuk menghubungkan nama menu
 # dengan fungsi halaman masing-masing.
-PAGES = {
+PAGES = { # membuat dictionary untuk menghubungkan menu dengan fungsi halaman
     "Beranda": page_beranda,
     "Materi": page_materi,
     "Konteks Terubuk": page_konteks,
@@ -1229,7 +1229,7 @@ PAGES = {
 
 # Menjalankan fungsi halaman sesuai menu
 # yang dipilih pengguna.
-PAGES[menu]()
+PAGES[menu]() # menjalankan halaman sesuai menu yang dipilih
 
 
 # ============================================================
@@ -1237,7 +1237,7 @@ PAGES[menu]()
 # ============================================================
 
 # Garis pemisah sebelum footer.
-st.markdown("---")
+st.markdown("---") # menampilkan teks/HTML/CSS pada aplikasi
 
 # Footer aplikasi.
 st.caption(
