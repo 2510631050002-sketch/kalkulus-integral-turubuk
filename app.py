@@ -35,7 +35,8 @@ import streamlit as st
 st.set_page_config(
     page_title="Kalkulus Integral Etnomatematika Terubuk",
     page_icon="🌿",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 
@@ -311,7 +312,21 @@ st.markdown(
     [data-testid="stAlert"] span {{
         color: #111111 !important;
     }}
+/* ========================================================
+   TOMBOL BUKA SIDEBAR
+   ======================================================== */
 
+button[data-testid="stSidebarCollapsedControl"] {{
+    background-color: #FFFFFF !important;
+    border: 1px solid #D8D8D8 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+}}
+
+button[data-testid="stSidebarCollapsedControl"] svg {{
+    color: #1F3D2B !important;
+    fill: #1F3D2B !important;
+}}
     </style>
     """,
     unsafe_allow_html=True
