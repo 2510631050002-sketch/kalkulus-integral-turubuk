@@ -221,34 +221,34 @@ st.markdown(
     }}
 
 
-   /* ========================================================
-   MENU RADIO SIDEBAR
-   ======================================================== */
+    /* ========================================================
+       MENU RADIO SIDEBAR
+       ======================================================== */
 
-/* Membuat tulisan menu sidebar tetap terlihat
-   baik pada mode terang maupun mode gelap perangkat. */
+    /* Membuat tulisan menu sidebar tetap terlihat
+       baik pada mode terang maupun mode gelap. */
 
-section[data-testid="stSidebar"] [role="radiogroup"] label {
-    color: #111111 !important;
-}
+    section[data-testid="stSidebar"] [role="radiogroup"] label {{
+        color: #111111 !important;
+    }}
 
-/* Tulisan nama setiap menu */
+    /* Tulisan nama setiap menu */
 
-section[data-testid="stSidebar"] [role="radiogroup"] label p {
-    color: #111111 !important;
-}
+    section[data-testid="stSidebar"] [role="radiogroup"] label p {{
+        color: #111111 !important;
+    }}
 
-/* Label "Pilih Halaman" */
+    /* Label "Pilih Halaman" */
 
-section[data-testid="stSidebar"] .stRadio > label {
-    color: #111111 !important;
-}
+    section[data-testid="stSidebar"] .stRadio > label {{
+        color: #111111 !important;
+    }}
 
-/* Tulisan yang sedang dipilih */
+    /* Tulisan menu yang sedang dipilih */
 
-section[data-testid="stSidebar"] [role="radiogroup"] label[data-checked="true"] p {
-    color: #111111 !important;
-}
+    section[data-testid="stSidebar"] [role="radiogroup"] label[data-checked="true"] p {{
+        color: #111111 !important;
+    }}
 
     /* ========================================================
        SLIDER
